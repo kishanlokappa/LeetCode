@@ -31,34 +31,31 @@ Input: arr = [1,3,5,7], pieces = [[2,4,6,8]]
 Output: false
 */
 let a = [91,4,64,78];
+
 let p = [[78],[4,64],[91]];
 console.log(canFormArray(a,p));
  function canFormArray(arr, pieces) {
+     let map = {};
 
-    let normalOrderArray = [];
-    let reverseOrderArray = [];
+     for(let p of pieces){
+         let key = p[0];
 
+         if(!(key in map)) {
+             map[key] =[];
+         }
+         map[key].push(...p)
+     }
 
-    for( let i = 0 ; i < pieces.length; i++){
-        
-        let normalOrderPiece =  pieces[i];
+     let res = [];
+     
+     for(let i = 0; i < arr.length; i++){
+         let key = arr[i];
 
-        for(let j = 0; j < normalOrderPiece.length; j++){
-            normalOrderArray.push(normalOrderPiece[j]);
-        }
-        
-    }
+         if(key in map){
+             res.push(...map[key]);
+         }
+     }
 
-    for( let i = pieces.length-1  ; i >= 0; i--){
-        
-        let reverseOrderPiece = pieces[i];
-
-        for(let j = 0; j < reverseOrderPiece.length; j++){
-            reverseOrderArray.push(reverseOrderPiece[j]);
-        }
-        
-    }
-    
-    console.log('comp Norm : ' +(arr == normalOrderArray));
-    console.log('comp reverse : ' +(arr == reverseOrderArray));
+     
+     return res.join("") == arr.join("");
 };
