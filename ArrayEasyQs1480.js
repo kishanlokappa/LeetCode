@@ -21,3 +21,18 @@ Example 3:
 Input: nums = [3,1,2,10,1]
 Output: [3,4,6,16,17]
 */
+let nums = [1,2,3,4];
+
+var runningSum = function(nums) {
+    let sumArray = [];
+    let sum = 0;
+
+    for(let i=0; i < nums.length; i++){
+        sum = sum + nums[i];
+        sumArray.push(sum);
+    }
+
+    return sumArray
+};
+
+console.log(runningSum(nums));
